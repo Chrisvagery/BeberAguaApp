@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useCallback } from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, Alert, TouchableOpacity } from "react-native";
 import { useFocusEffect } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AguaContador from "../components/agua_contador";
@@ -81,12 +81,26 @@ export default function HomeScreen() {
     }
   };
 
+  const mostrarAjuda = () => {
+    Alert.alert(
+      "Como usar o app 💧",
+      "• Toque em 'Bebi um copo!' para registrar seu consumo de água.\n" +
+        "• Acompanhe o histórico na aba 'Histórico'.\n" +
+        "• Configure notificações, tema, nome e meta diária na aba 'Configurações'.\n" +
+        "• Use o botão 'Reiniciar o Dia' para zerar os copos de hoje (sem apagar o histórico).\n" +
+        "• Para voltar à tela inicial, toque no ícone 🏠 no menu inferior.\n" +
+        "• Obrigado por usar nosso App 💧",
+      [{ text: "Entendi", style: "default" }]
+    );
+  };
+
+
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
       <Text style={[styles.title, { color: theme.primaryDark }]}>
         Lembrete de Água
       </Text>
-  
+
       <AguaContador copos={copos} setCopos={setCopos} meta={meta} />
 
       <TouchableOpacity onPress={resetarHoje} style={styles.resetButton}>
@@ -102,6 +116,9 @@ export default function HomeScreen() {
       <Text style={[styles.progress, { color: theme.primary }]}>
         {meta && meta > 0 ? `${copos} / ${meta} copos` : `${copos} copos`}
       </Text>
+      <TouchableOpacity onPress={mostrarAjuda} style={styles.botaoAjuda}>
+        <Text style={styles.textoAjuda}>❓</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -142,5 +159,22 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
     fontSize: 14,
+  },
+  botaoAjuda: {
+    position: "absolute",
+    bottom: 30,
+    right: 20,
+    backgroundColor: "#2196F3",
+    borderRadius: 25,
+    width: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 5,
+  },
+  textoAjuda: {
+    color: "#fff",
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });

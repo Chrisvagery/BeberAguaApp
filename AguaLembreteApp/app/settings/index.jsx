@@ -154,7 +154,7 @@ export default function SettingsScreen() {
 
           <View style={styles.settingColumn}>
             <Text style={[styles.label, { color: theme.secondaryText }]}>
-              Meta diária de copos
+            Definir sua meta diária de copos
             </Text>
             <TextInput
               value={String(meta)}

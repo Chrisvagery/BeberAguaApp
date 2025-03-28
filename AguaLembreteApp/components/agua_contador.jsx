@@ -68,11 +68,11 @@ export default function AguaContador({ copos, setCopos, meta }) {
         />
       </View>
       <View style={styles.cardFooter}>
-        <Text style={styles.counter}>{copos} 💧</Text>
+        <Text style={styles.counter}> 💧</Text>
       </View>
 
       <Text style={[styles.progresso, { color: theme.secondaryText }]}>
-        {meta && meta > 0 ? `${copos} / ${meta} copos` : `${copos} copos`}
+        {meta && meta > 0 ? `${copos} / ${meta} copos` : `${copos} copos`} 
       </Text>
     </View>
   );
